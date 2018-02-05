@@ -1108,6 +1108,7 @@ static void update_curr_rt(struct rq *rq)
 {
 	struct task_struct *curr = rq->curr;
 	struct sched_rt_entity *rt_se = &curr->rt;
+	u64 now = rq_clock_task(rq);
 	u64 delta_exec;
 	int cpu = rq_cpu(rq);
 #ifdef CONFIG_MTK_RT_THROTTLE_MON
@@ -1122,7 +1123,7 @@ static void update_curr_rt(struct rq *rq)
 		return;
 
 	per_cpu(update_exec_start, rq->cpu) = curr->se.exec_start;
-	delta_exec = rq_clock_task(rq) - curr->se.exec_start;
+	delta_exec = now - curr->se.exec_start;
 	if (unlikely((s64)delta_exec <= 0))
 		return;
 
@@ -1143,7 +1144,7 @@ static void update_curr_rt(struct rq *rq)
 	curr->se.sum_exec_runtime += delta_exec;
 	account_group_exec_runtime(curr, delta_exec);
 
-	curr->se.exec_start = rq_clock_task(rq);
+        curr->se.exec_start = now;
 	cpuacct_charge(curr, delta_exec);
 
 	sched_rt_avg_update(rq, delta_exec);
