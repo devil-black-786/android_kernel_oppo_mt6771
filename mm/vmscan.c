@@ -3506,7 +3506,6 @@ static unsigned long balance_pgdat(pg_data_t *pgdat, int order,
 		bool raise_priority = true;
 		bool pgdat_needs_compaction = (order > 0);
 
-		simple_lmk_decide_reclaim(sc.priority);
 		sc.nr_reclaimed = 0;
 
 		/*
