@@ -10,7 +10,7 @@ echo "Cloning dependencies if they don't exist...."
 
 if [ ! -d clang ]
 then
-git clone --depth=1 https://github.com/crdroidmod/android_prebuilts_clang_host_linux-x86_clang-5407736 clang
+git clone --depth=1 https://github.com/techyminati/android_prebuilts_clang_host_linux-x86_clang-5484270 clang
 
 fi
 
