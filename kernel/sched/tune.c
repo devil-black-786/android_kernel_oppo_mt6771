@@ -300,7 +300,7 @@ static void
 schedtune_cpu_update(int cpu)
 {
 	struct boost_groups *bg;
-	int boost_max;
+	int boost_max = INT_MIN;
 	int idx;
 	int max_capacity_min;
 
@@ -309,7 +309,8 @@ schedtune_cpu_update(int cpu)
 	/* The root boost group is always active */
 	boost_max = bg->group[0].boost;
 	max_capacity_min = bg->group[0].capacity_min;
-	for (idx = 1; idx < BOOSTGROUPS_COUNT; ++idx) {
+	for (idx = 0; idx < BOOSTGROUPS_COUNT; ++idx) {
+
 		/*
 		 * A boost group affects a CPU only if it has
 		 * RUNNABLE tasks on that CPU
@@ -319,21 +320,10 @@ schedtune_cpu_update(int cpu)
 		boost_max = max(boost_max, bg->group[idx].boost);
 		max_capacity_min = max(max_capacity_min, bg->group[idx].capacity_min);
 	}
-	/* Ensures boost_max is non-negative when all cgroup boost values
-	 * are neagtive. Avoids under-accounting of cpu capacity which may cause
-	 * task stacking and frequency spikes.
-	 */
-	/* mtk:
-	 * If original path, max(boost_max, 0)
-	 * If use mtk perfservice kernel API to update negative boost,
-	 * when all group are neagtive, boost_max should lower than 0
-	 * and it can decrease frequency.
-	 */
-	if (!global_negative_flag) {
-		boost_max = max(boost_max, 0);
-		max_capacity_min = max(max_capacity_min, 0);
-	}
 
+	/* If there are no active boost groups on the CPU, set no boost  */
+	if (boost_max == INT_MIN)
+		boost_max = 0;
 	bg->boost_max = boost_max;
 	bg->max_capacity_min = max_capacity_min;
 }
