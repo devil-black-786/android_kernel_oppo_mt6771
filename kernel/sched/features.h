@@ -49,11 +49,7 @@
  * Queue remote wakeups on the target CPU and process them
  * using the scheduler IPI. Reduces rq->lock contention/bounces.
  */
-<<<<<<< HEAD
-SCHED_FEAT(TTWU_QUEUE, true)
-=======
 #define SCHED_FEAT_TTWU_QUEUE 0
->>>>>>> 7670dce579b1 (sched: Resolve sched_feat() at compile time to improve code optimization)
 
 #ifdef HAVE_RT_PUSH_IPI
 /*
@@ -79,70 +75,26 @@ SCHED_FEAT(TTWU_QUEUE, true)
  * HMP scheduling. Use dynamic threshold depends on system load and
  * CPU capacity to make schedule decisions.
  */
-<<<<<<< HEAD
 #ifdef CONFIG_SCHED_HMP
-SCHED_FEAT(SCHED_HMP, true)
+#define SCHED_FEAT_SCHED_HMP 1
 #else
-SCHED_FEAT(SCHED_HMP, false)
+#define SCHED_FEAT_SCHED_HMP 0
 #endif
-=======
-#define SCHED_FEAT_UTIL_EST 1
-#define SCHED_FEAT_UTIL_EST_FASTUP 1
->>>>>>> 7670dce579b1 (sched: Resolve sched_feat() at compile time to improve code optimization)
 
 /*
  * Energy aware scheduling. Use platform energy model to guide scheduling
  * decisions optimizing for energy efficiency.
  */
-<<<<<<< HEAD
-#ifdef CONFIG_MTK_SCHED_EAS_PLUS
-SCHED_FEAT(ENERGY_AWARE, true)
-=======
 #ifdef CONFIG_DEFAULT_USE_ENERGY_AWARE
 #define SCHED_FEAT_ENERGY_AWARE 1
->>>>>>> 7670dce579b1 (sched: Resolve sched_feat() at compile time to improve code optimization)
 #else
 #define SCHED_FEAT_ENERGY_AWARE 0
 #endif
 
 /*
-<<<<<<< HEAD
-=======
- * Minimum capacity capping. Keep track of minimum capacity factor when
- * minimum frequency available to a policy is modified.
- * If enabled, this can be used to inform the scheduler about capacity
- * restrictions.
- */
-#define SCHED_FEAT_MIN_CAPACITY_CAPPING 1
-
-/*
- * Energy aware scheduling algorithm choices:
- * EAS_PREFER_IDLE
- *   Direct tasks in a schedtune.prefer_idle=1 group through
- *   the EAS path for wakeup task placement. Otherwise, put
- *   those tasks through the mainline slow path.
- */
-#define SCHED_FEAT_EAS_PREFER_IDLE 1
-
-/*
->>>>>>> 7670dce579b1 (sched: Resolve sched_feat() at compile time to improve code optimization)
  * Enforce the priority of candidates selected by find_best_target()
  * ON: If the target CPU saves any energy, use that.
  * OFF: Use whichever of target or backup saves most.
  */
-<<<<<<< HEAD
-SCHED_FEAT(FBT_STRICT_ORDER, false)
-=======
 #define SCHED_FEAT_FBT_STRICT_ORDER 0
 
-/*
- * Apply schedtune boost hold to tasks of all sched classes.
- * If enabled, schedtune will hold the boost applied to a CPU
- * for 50ms regardless of task activation - if the task is
- * still running 50ms later, the boost hold expires and schedtune
- * boost will expire immediately the task stops.
- * If disabled, this behaviour will only apply to tasks of the
- * RT class.
- */
-#define SCHED_FEAT_SCHEDTUNE_BOOST_HOLD_ALL 0
->>>>>>> 7670dce579b1 (sched: Resolve sched_feat() at compile time to improve code optimization)
