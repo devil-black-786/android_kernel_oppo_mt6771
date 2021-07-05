@@ -78,9 +78,9 @@ function zipping() {
     echo -e "${YELLOW}"
     echo "Creating a flashable zip....."
     cd AnyKernel || exit 1
-    zip -r9 Hentai-Big-Booba-CPH1859-${TANGGAL}.zip * > /dev/null 2>&1
+    zip -r9 Hentai-お兄ちゃん-CPH1859-${TANGGAL}.zip * > /dev/null 2>&1
     cd ..
-    echo "Zip stored at AnyKernel/Hentai-Big-Booba-CPH1859-${TANGGAL}.zip"
+    echo "Zip stored at AnyKernel/Hentai-お兄ちゃん-CPH1859-${TANGGAL}.zip"
     echo -e "${RST}"
 }
 compile
