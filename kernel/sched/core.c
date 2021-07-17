@@ -1043,7 +1043,7 @@ if (unlikely(!cpu_active(dest_cpu)))
 	return rq;
 
 /* Affinity changed (again). */
-	if (!is_cpu_allowed(p, dest_cpu))
+if (!is_cpu_allowed(p, dest_cpu))
 		return rq;
 
 rq = move_queued_task(rq, p, dest_cpu);
