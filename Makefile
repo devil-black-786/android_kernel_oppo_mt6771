@@ -404,7 +404,6 @@ KBUILD_CFLAGS_MODULE  := -DMODULE
 KBUILD_LDFLAGS_MODULE := -T $(srctree)/scripts/module-common.lds
 TARGET_BUILD_VARIANT := user
 TARGET_PRODUCT := full_oppo6771
-VENDOR_EDIT := 1
 
 #ifdef  VENDOR_EDIT
 #LiPing-m@PSW.MM.Display.LCD.Machine, 2017/11/03, Add for VENDOR_EDIT macro in kernel
@@ -490,7 +489,6 @@ export KBUILD_AFLAGS_KERNEL KBUILD_CFLAGS_KERNEL
 export KBUILD_ARFLAGS
 export TARGET_BUILD_VARIANT
 export TARGET_PRODUCT
-export VENDOR_EDIT
 
 
 # When compiling out-of-tree modules, put MODVERDIR in the module
